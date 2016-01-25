@@ -1,0 +1,15 @@
+{
+  "name": "linksync",
+  "productName": "LinkSync",
+  "identifier": "net.lakesite.linksync",
+  "description": "A multi-platform bookmark, note and media system",
+  "version": "0.0.1",
+  "author": "Andrew Duncan",
+  "copyright": "Copyright 2016 Andrew Duncan",
+  "main": "linksync.js",
+  "dependencies": {
+    "commander": "~2.9.0",
+    "request": "~2.67.0",
+    "prettyjson": "~1.1.3"
+  }
+}
