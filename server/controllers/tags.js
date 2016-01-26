@@ -33,7 +33,7 @@ module.exports = {
   search: function(req, res, next) {
     req.models.tag.findAll({
       where: {
-        name: { $like: '%' + req.body.url + '%' }
+        name: { $like: '%' + req.body.name + '%' }
       }
     }).then(function(tags) {
       res.status(200).json(tags);

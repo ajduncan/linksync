@@ -106,7 +106,7 @@ program
 
 program
   .command('find [url]')
-  .description('Find links saved to the system that are similar to [url]')
+  .description('Find links similar to [url]')
   .action(function(url, options) {
     request.post(
       API + '/links/search/',
@@ -140,6 +140,7 @@ program
   .option("-d, --delete [id]", "delete tag by id")
   .option("-r, --rename [oldtag] [newtag]", "renames oldtag to newtag")
   .option("-l, --list", "lists tags")
+  .option("-f, --find [tag]", "Find tags similar to [tag]")
   .action(function(options) {
     var got_option = false;
     if (options.add) {
@@ -160,7 +161,25 @@ program
           }
         }
       );
-      console.log('Got option to add tag: %s', options.add);
+    }
+    if (options.find) {
+      got_option = true;
+      request.post(
+        API + '/tags/search/',
+        {
+          formData: {
+            name: options.find,
+          },
+          json: true
+        },
+        function(error, response, body) {
+          if (!error && response.statusCode == 200) {
+            console.log(prettyjson.render(body));
+          } else {
+            console.log('Error listing links: %s', error);
+          }
+        }
+      );
     }
     if (options.get) {
       got_option = true;
@@ -223,6 +242,7 @@ program
     console.log('    $ linksync tags -a tech,news,investing,sports');
     console.log('    $ linksync tags -d tech');
     console.log('    $ linksync tags -r news technews');
+    console.log('    $ linksync tags -f news');
     console.log();
   });
 

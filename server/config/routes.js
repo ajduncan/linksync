@@ -39,5 +39,6 @@ module.exports = function(app) {
   app.post('/tags', upload.array(), controllers.tags.create);
   app.get('/tags/:id', upload.array(), controllers.tags.get);
   app.delete('/tags/:id', upload.array(), controllers.tags.delete);
+  app.post('/tags/search/', upload.array(), controllers.tags.search);
 
 };
